@@ -1,7 +1,12 @@
 import { useState } from 'react';
 
 const SortVisualizer = () => {
-  const [array, setArray] = useState<number[]>([10, 6, 7, 3, 8, 1, 2, 9, 4, 5]);
+  const initialArray = [3, 7, 11, 6, 5, 8, 4];
+  const [array, setArray] = useState<number[]>(initialArray);
+
+  const reset = () => {
+    setArray(initialArray);
+  };
 
   // Function to simulate swapping elements in an array
   const swap = (items: number[], leftIndex: number, rightIndex: number) => {
@@ -147,10 +152,13 @@ const SortVisualizer = () => {
       <button onClick={() => insertionSort()}>Start Insertion Sort</button>
       <br />
       <button onClick={() => startQuickSort()}>Start Quick Sort</button>
+      <br />
+      <button onClick={() => reset()}>reset</button>
       <div className="flex items-center gap-5">
         {array.map((value, idx) => (
           <div
-            className={`p-${value} text-white m-1 bg-blue-500 rounded-full flex justify-center items-center`}
+            style={{ height: `${value * 15}px`, width: `${value * 15}px` }}
+            className={`text-white m-1 bg-blue-500 rounded-full flex justify-center items-center`}
             key={idx}
           >
             <p>{value}</p>
